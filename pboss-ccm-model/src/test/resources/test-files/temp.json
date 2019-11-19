@@ -1,0 +1,59 @@
+{
+	"req_header": {
+		"request_timestamp": "2017-02-16T18:03:30+02",
+		"api_version": "1.1.0",
+		"corr_id": "82cda5e6-8602-4a92-aa30-f81bed6e17b0",
+		"test_level": 0,
+		"api_credentials": {
+			"account_name": "Test Account",
+			"api_key": "XXXKEYZZZ"
+		},
+		"system_instance_id": "default"
+	},
+	"req_guid": "82cda5e6-8602-4a92-aa30-f81bed6e17b0",
+	"cic": {
+		"cic_status": "RECEIVED",
+		"cic_date_time": "2017-02-16T18:03:30+02",
+		"cic_type_code": "CICTYPE1",
+		"cic_part_list": [
+			{
+				"creation_type": "rendered_cic_part",
+				"cic_part_type_code": "PT2",
+				"file_name": "Body.txt",
+				"part_id": "1",
+				"part_guid": "0b1d7ba4-6061-466e-a546-3f9fcabf6477",
+				"description": "Mail Body",
+				"render_spec": {
+					"render_type": "freemarker_render_spec",
+					"render_payload": "{ \"application\": { \"type\": \"Loan\", \"amount\": \"20.00\", \"applicant\": { \"name\": \"Gregory Alan\",\"surname\": \"Fullard\" } }}",
+					"payload_type": "JSON"
+				}
+			},
+			{
+				"creation_type": "rendered_cic_part",
+				"cic_part_type_code": "PT4",
+				"file_name": "Subject.txt",
+				"part_id": "2",
+				"part_guid": "425a13b6-0df3-4a05-855f-da134d996dbb",
+				"description": "Mail Subject",
+				"render_spec": {
+					"render_type": "freemarker_render_spec",
+					"render_payload": "<letter><name>Greg</name><surname>Fullard</surname></letter>",
+					"payload_type": "XML"
+				}
+			}
+		],
+		"deliver_spec_list": [
+			{
+				"deliver_type": "email_deliver_spec",
+				"contact_id": "12345",
+				"contact_type": "INDIVIDUAL",
+				"deliver_spec_guid": "0939cc33-3027-4902-bd49-76796e87c5e7",
+				"from_address": "testfrom@test.com",
+				"to_address": "gregf@8bitplatoon.com",
+				"part_id_subject": "2",
+				"part_id_body": "1"
+			}
+		]
+	}
+}

@@ -1,0 +1,32 @@
+{
+  "req_header" : {
+    "request_timestamp" : "2016-10-03T17:37:36+02",
+    "api_version" : "0.1",
+    "corr_id" : "COR1",
+    "test_level" : 1,
+    "api_credentials" : {
+      "account_name" : "Test Account",
+      "api_key" : "XXXKEYZZZ"
+    }
+  },
+  "req_guid" : "GUID",
+  "cic" : {
+    "cic_date_time" : "2016-10-03T17:37:36+02",
+    "cic_type_code" : "CICTYPE1",
+    "cic_part_list" : [ {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT1",
+      "file_name" : "FileName1.txt",
+      "part_id" : "1",
+      "render_spec" : {
+        "render_type" : "freemarker_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    } ],
+    "deliver_spec_list" : [ {
+      "deliver_type" : "sms_deliver_spec",
+      "mobile_number" : "1234567890",
+      "part_id_sms_body" : "1"
+    } ]
+  }
+}

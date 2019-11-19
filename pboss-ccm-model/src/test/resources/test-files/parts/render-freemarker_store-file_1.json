@@ -1,0 +1,14 @@
+{"creation_type":"rendered_cic_part",
+ "cic_part_type_code":"PT1",
+ "file_name":"FileName1.txt",
+ "part_id":"1",
+ "store_spec_list":[{
+	"store_spec_type":"linux_fs_store_spec",
+	"file_path":"/home/gregf/test.pdf",
+	"make_unique":false,
+	"overwrite":true
+ }],
+ "render_spec":{
+	"render_type":"freemarker_render_spec",
+	"render_payload":"<letter><name>Greg</name><surname>Fullard</surname></letter>"
+ }}

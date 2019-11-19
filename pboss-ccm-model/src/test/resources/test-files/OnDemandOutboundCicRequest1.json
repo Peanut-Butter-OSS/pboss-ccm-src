@@ -1,0 +1,148 @@
+{
+  "req_header" : {
+    "request_timestamp" : "2016-10-03T17:36:01+02",
+    "api_version" : "0.1",
+    "corr_id" : "COR1",
+    "test_level" : 1,
+    "api_credentials" : {
+      "account_name" : "Test Account",
+      "api_key" : "XXXKEYZZZ"
+    }
+  },
+  "req_guid" : "GUID",
+  "cic" : {
+    "cic_date_time" : "2016-10-03T17:36:01+02",
+    "cic_type_code" : "CICTYPE1",
+    "cic_life_cycle_detail" : {
+      "life_span_minutes" : 60.0
+    },
+    "cic_subs_detail" : {
+      "override_subs" : true,
+      "subs_override_key" : "KEY"
+    },
+    "custom_metadata" : {
+      "key1" : "value1",
+      "key2" : "value2",
+      "key3" : 3
+    },
+    "cic_part_list" : [ {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT1",
+      "file_name" : "FileName1.txt",
+      "part_id" : "1",
+      "render_spec" : {
+        "render_type" : "freemarker_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    }, {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT2",
+      "file_name" : "FileName2.pdf",
+      "part_id" : "2",
+      "render_spec" : {
+        "render_type" : "fop_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    }, {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT3",
+      "file_name" : "FileName3.pdf",
+      "part_id" : "3",
+      "render_spec" : {
+        "render_type" : "ecrion_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    }, {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT4",
+      "file_name" : "FileName4.html",
+      "part_id" : "4",
+      "render_spec" : {
+        "render_type" : "xslt_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    }, {
+      "creation_type" : "rendered_cic_part",
+      "cic_part_type_code" : "PT5",
+      "file_name" : "FileName5.pdf",
+      "part_id" : "5",
+      "render_spec" : {
+        "render_type" : "itext_render_spec",
+        "render_payload" : "<letter><name>Greg</name><surname>Fullard</surname></letter>"
+      }
+    }, {
+      "creation_type" : "included_cic_part",
+      "cic_part_type_code" : "PT6",
+      "file_name" : "FileName6.txt",
+      "part_id" : "6",
+      "include_spec" : {
+        "content" : "Included text as part of flavour 1",
+        "content_type" : "TEXT"
+      }
+    }, {
+      "creation_type" : "included_cic_part",
+      "cic_part_type_code" : "PT7",
+      "file_name" : "FileName7.html",
+      "part_id" : "7",
+      "include_spec" : {
+        "content" : "<html><body><p>Included HTML as part of flavour 2</p><body></html>",
+        "content_type" : "HTML"
+      }
+    }, {
+      "creation_type" : "included_cic_part",
+      "cic_part_type_code" : "PT8",
+      "file_name" : "FileName8.xml",
+      "part_id" : "8",
+      "include_spec" : {
+        "content" : "<html><body><p>Included XML as part of flavour 2</p><body></html>",
+        "content_type" : "XML"
+      }
+    }, {
+      "creation_type" : "assembled_cic_part",
+      "cic_part_type_code" : "PT9",
+      "file_name" : "assembled1pdf",
+      "part_id" : "9",
+      "assembly_spec" : {
+        "assembly_spec_type" : "ddx_assembly_spec",
+        "runtime_ddx" : "dummyDDX.xml"
+      }
+    }, {
+      "creation_type" : "assembled_cic_part",
+      "cic_part_type_code" : "PT10",
+      "file_name" : "assembled2pdf",
+      "part_id" : "10",
+      "assembly_spec" : {
+        "assembly_spec_type" : "custom_assembly_spec",
+        "req_queue" : "REQ.DUMMY",
+        "resp_queue" : "RESP.DUMMY"
+      }
+    }, {
+      "creation_type" : "referenced_cic_part",
+      "cic_part_type_code" : "PT11",
+      "file_name" : "referenced1pdf",
+      "part_id" : "11",
+      "reference_spec" : {
+        "ref_spec_type" : "linux_fs_reference_spec",
+        "file_path" : "/home/user/test.pdf"
+      }
+    } ],
+    "deliver_spec_list" : [ {
+      "deliver_type" : "sms_deliver_spec",
+      "mobile_number" : "1234567890",
+      "part_id_sms_body" : "1"
+    }, {
+      "deliver_type" : "email_deliver_spec",
+      "from_address" : "testfrom@test.com",
+      "to_address" : "test@test.com",
+      "part_id_subject" : "1",
+      "part_id_body" : "4"
+    }, {
+      "deliver_type" : "email_deliver_spec",
+      "from_address" : "testfrom@test.com",
+      "to_address" : "test@test.com",
+      "part_id_subject" : "1",
+      "part_id_body" : "4",
+      "attachment_list" : [ "2", "3" ]
+    } ]
+  }
+}
