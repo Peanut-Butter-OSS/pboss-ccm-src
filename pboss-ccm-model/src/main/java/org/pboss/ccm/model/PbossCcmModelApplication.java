@@ -1,4 +1,4 @@
-package org.pboss.ccm.pbossccmmodel;
+package org.pboss.ccm.model;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
