@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/on-demand-cics")
+@RequestMapping(path = "/on-demand-req-svc")
 public class OnDemandReqRestEndpoint {
   
   Logger logger = LoggerFactory.getLogger(OnDemandReqRestEndpoint.class);

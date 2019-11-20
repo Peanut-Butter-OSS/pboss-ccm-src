@@ -21,7 +21,6 @@ public class PbossCcmTestSvcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PbossCcmTestSvcApplication.class, args);
 	}
-
 }
 
 @RestController
