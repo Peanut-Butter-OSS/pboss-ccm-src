@@ -14,10 +14,11 @@ import org.pboss.ccm.model.api.request.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
+@RefreshScope
 public class CicRequestValidator {
 
   Logger logger = LoggerFactory.getLogger(CicRequestValidator.class);
@@ -27,7 +28,6 @@ public class CicRequestValidator {
   
   @PostConstruct
   public void init() {
-      System.out.println("================== " + apiVersion + "================== ");
   }
   
   public ValidationResult validateCicRequest(OnDemandOutboundCicRequest req) {
