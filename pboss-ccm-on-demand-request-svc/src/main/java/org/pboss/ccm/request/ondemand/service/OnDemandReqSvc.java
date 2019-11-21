@@ -16,21 +16,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
 
 @Service
 @RefreshScope
 public class OnDemandReqSvc {
 
   Logger logger = LoggerFactory.getLogger(OnDemandReqSvc.class);
+  
+  private final RabbitTemplate rabbitTemplate;
+  static final String topicExchangeName = "spring-boot-exchange";
+  static final String queueName = "spring-boot";
 
   @Value("${api.version}")
   private String apiVersion;
@@ -38,6 +43,26 @@ public class OnDemandReqSvc {
   @Autowired
   private CicRequestValidator validator;
 
+  @Bean
+  Queue queue() {
+      return new Queue(queueName, false);
+  }
+
+  @Bean
+  TopicExchange exchange() {
+      return new TopicExchange(topicExchangeName);
+  }
+
+  @Bean
+  Binding binding(Queue queue, TopicExchange exchange) {
+      return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
+  }
+  
+
+  public OnDemandReqSvc(RabbitTemplate rabbitTemplate) {
+      this.rabbitTemplate = rabbitTemplate;
+  }
+  
   // TODO: Add proper exception handling
   public OnDemandOutboundCicResponse submitOnDemandOutboundCicRequest(
       OnDemandOutboundCicRequest req) throws RuntimeException {
@@ -60,7 +85,7 @@ public class OnDemandReqSvc {
 
       ReqHeader reqHeader = req.getReqHeader();
 
-      // Convert request to JSON and send to JMS Broker
+      // Convert request to JSON and send to RabbitMQ
       ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
       String jsonPrettyString = null;
       String jsonString = null;
@@ -79,7 +104,7 @@ public class OnDemandReqSvc {
         }
 
         // Handle the API Version
-        // If it was not supplied, initialise with the default system property
+        // If it was not supplied, initialize with the default system property
         // If it was supplied but is incorrect, throw an exception and notify user
         if (reqHeader.getApiVersion() == null) {
           reqHeader.setApiVersion(apiVersion);
@@ -89,7 +114,7 @@ public class OnDemandReqSvc {
           throw new RuntimeException(msg);
         }
 
-        // If no correlation id was supplied, initialise it with the value of the GUID
+        // If no correlation id was supplied, initialize it with the value of the GUID
         if (reqHeader.getCorrId() == null) {
           reqHeader.setCorrId(reqGuid);
         }
@@ -129,6 +154,10 @@ public class OnDemandReqSvc {
         jsonPrettyString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(req);
         jsonString = mapper.writeValueAsString(req);
         logger.debug(jsonString);
+        
+        // Send message to RabbitMQ
+        rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "Hello from RabbitMQ!");
+        
         // MsgProducerArtemis mqProducer = new MsgProducerArtemis();
         // String queueJndiName = "jms/queue/c3mMasterQueue";
         // logger.debug("Calling Artemis MSG Producer");
