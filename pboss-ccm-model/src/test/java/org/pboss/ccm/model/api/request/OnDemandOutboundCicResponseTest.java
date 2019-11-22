@@ -78,18 +78,18 @@ class OnDemandOutboundCicResponseTest {
           OnDemandOutboundCicResponse resp = mapper.readValue(file, OnDemandOutboundCicResponse.class);
           System.out.println(resp.toString());
 
-          assertEquals("1.1.0", resp.getC3mRespHeader().getApiVersion());
-          assertEquals("COR1", resp.getC3mRespHeader().getCorrId());
-          assertEquals("942ad0c7-9e68-4102-9a00-893d5fa2749e", resp.getC3mRespHeader().getReqGuid());
-          assertEquals(0, resp.getC3mRespHeader().getRespCode());
-          assertEquals("Successfully submitted CIC Request to C3M Core", resp.getC3mRespHeader().getRespMsg());
-          assertEquals(2017, resp.getC3mRespHeader().getResponseTimestamp().getYear());
-          assertEquals(2, resp.getC3mRespHeader().getResponseTimestamp().getMonthValue());
-          assertEquals(9, resp.getC3mRespHeader().getResponseTimestamp().getDayOfMonth());
-          assertEquals(ZoneOffset.ofHours(0), resp.getC3mRespHeader().getResponseTimestamp().getOffset());
-          assertEquals(13, resp.getC3mRespHeader().getResponseTimestamp().getHour());
-          assertEquals(18, resp.getC3mRespHeader().getResponseTimestamp().getMinute());
-          assertEquals(22, resp.getC3mRespHeader().getResponseTimestamp().getSecond());
+          assertEquals("1.1.0", resp.getRespHeader().getApiVersion());
+          assertEquals("COR1", resp.getRespHeader().getCorrId());
+          assertEquals("942ad0c7-9e68-4102-9a00-893d5fa2749e", resp.getRespHeader().getReqGuid());
+          assertEquals(0, resp.getRespHeader().getRespCode());
+          assertEquals("Successfully submitted CIC Request to CCM Core", resp.getRespHeader().getRespMsg());
+          assertEquals(2017, resp.getRespHeader().getResponseTimestamp().getYear());
+          assertEquals(2, resp.getRespHeader().getResponseTimestamp().getMonthValue());
+          assertEquals(9, resp.getRespHeader().getResponseTimestamp().getDayOfMonth());
+          assertEquals(ZoneOffset.ofHours(0), resp.getRespHeader().getResponseTimestamp().getOffset());
+          assertEquals(13, resp.getRespHeader().getResponseTimestamp().getHour());
+          assertEquals(18, resp.getRespHeader().getResponseTimestamp().getMinute());
+          assertEquals(22, resp.getRespHeader().getResponseTimestamp().getSecond());
 
           
       } catch (JsonGenerationException e) {
@@ -105,23 +105,23 @@ class OnDemandOutboundCicResponseTest {
   
   private OnDemandOutboundCicResponse buildResp(String flavour) {
       OnDemandOutboundCicResponse resp = new OnDemandOutboundCicResponse();
-      RespHeader c3mRespHeader = new RespHeader();
+      RespHeader respHeader = new RespHeader();
       
-      c3mRespHeader.setResponseTimestamp(OffsetDateTime.now());
-      c3mRespHeader.setApiVersion("1.0");
-      c3mRespHeader.setCorrId("Test");
-      c3mRespHeader.setReqGuid("XYZ");
+      respHeader.setResponseTimestamp(OffsetDateTime.now());
+      respHeader.setApiVersion("1.0");
+      respHeader.setCorrId("Test");
+      respHeader.setReqGuid("XYZ");
       
       if (flavour.equalsIgnoreCase("SUCCESS")) { 
-          c3mRespHeader.setRespCode(0);
-          c3mRespHeader.setRespMsg("Some message");
+          respHeader.setRespCode(0);
+          respHeader.setRespMsg("Some message");
       } else if (flavour.equalsIgnoreCase("FAIL")) {
-          c3mRespHeader.setRespCode(1);
-          c3mRespHeader.setRespMsg("Some message");
-          c3mRespHeader.setErrorId(12345);
+          respHeader.setRespCode(1);
+          respHeader.setRespMsg("Some message");
+          respHeader.setErrorId(12345);
       }
       
-      resp.setC3mRespHeader(c3mRespHeader);
+      resp.setRespHeader(respHeader);
       
       return resp;
   }

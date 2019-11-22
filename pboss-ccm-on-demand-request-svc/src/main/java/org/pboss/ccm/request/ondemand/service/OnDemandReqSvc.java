@@ -34,8 +34,8 @@ public class OnDemandReqSvc {
   Logger logger = LoggerFactory.getLogger(OnDemandReqSvc.class);
   
   private final RabbitTemplate rabbitTemplate;
-  static final String topicExchangeName = "spring-boot-exchange";
-  static final String queueName = "spring-boot";
+  static final String topicExchangeName = "pboss-ccm-exchange";
+  static final String queueName = "pboss.ccm.master";
 
   @Value("${api.version}")
   private String apiVersion;
@@ -55,7 +55,7 @@ public class OnDemandReqSvc {
 
   @Bean
   Binding binding(Queue queue, TopicExchange exchange) {
-      return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
+      return BindingBuilder.bind(queue).to(exchange).with("pboss.ccm.#");
   }
   
 
@@ -156,12 +156,8 @@ public class OnDemandReqSvc {
         logger.debug(jsonString);
         
         // Send message to RabbitMQ
-        rabbitTemplate.convertAndSend(topicExchangeName, "foo.bar.baz", "Hello from RabbitMQ!");
-        
-        // MsgProducerArtemis mqProducer = new MsgProducerArtemis();
-        // String queueJndiName = "jms/queue/c3mMasterQueue";
-        // logger.debug("Calling Artemis MSG Producer");
-        // mqProducer.sendToQueue(jsonString, queueJndiName);
+        // Exchange, routing key, message
+        rabbitTemplate.convertAndSend(topicExchangeName, "pboss.ccm.master", jsonString);
 
         respHeader.setRespCode(0);
         respHeader.setRespMsg("Successfully submitted CIC Request to PBoss CCM Core");
@@ -201,7 +197,7 @@ public class OnDemandReqSvc {
     respHeader.setResponseTimestamp(responseTimestamp);
     respHeader.setCorrId(req.getReqHeader().getCorrId());
     OnDemandOutboundCicResponse resp = new OnDemandOutboundCicResponse();
-    resp.setC3mRespHeader(respHeader);
+    resp.setRespHeader(respHeader);
     resp.setValidationResult(validationResult);
     return resp;
   }

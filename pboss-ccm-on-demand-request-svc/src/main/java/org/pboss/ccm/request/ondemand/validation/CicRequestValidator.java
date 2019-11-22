@@ -32,7 +32,7 @@ public class CicRequestValidator {
   
   public ValidationResult validateCicRequest(OnDemandOutboundCicRequest req) {
     
-    logger.info("C3M Request Subsystem :: Validating CIC Request");
+    logger.info("CCM Request Subsystem :: Validating CIC Request");
     
     ValidationResult result = new ValidationResult();
     List<ValidationIssue> issueList = new ArrayList<ValidationIssue>();
@@ -113,7 +113,7 @@ private List<ValidationIssue> validateDeliverySpecs(OnDemandOutboundCicRequest r
             // Get the type of delivery spec. We will separately validate each
             String specClass = deliverSpec.getClass().getName();
             
-            logger.info("C3M Request Subsystem :: Validating Delivery Spec. Spec #" + i + " Spec Type: " + specClass);
+            logger.info("CCM Request Subsystem :: Validating Delivery Spec. Spec #" + i + " Spec Type: " + specClass);
             
             switch (specClass) {
             case "org.pboss.ccm.model.api.request.EmailDeliverSpec":      

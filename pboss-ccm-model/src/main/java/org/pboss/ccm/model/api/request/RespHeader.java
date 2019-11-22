@@ -114,7 +114,7 @@ public class RespHeader {
 
 	@Override
 	public String toString() {
-		return "C3mRespHeader [responseTimestamp=" + responseTimestamp + ", apiVersion=" + apiVersion + ", corrId="
+		return "RespHeader [responseTimestamp=" + responseTimestamp + ", apiVersion=" + apiVersion + ", corrId="
 				+ corrId + ", reqGuid=" + reqGuid + ", respCode=" + respCode + ", respMsg=" + respMsg + ", errorId="
 				+ errorId + "]";
 	}

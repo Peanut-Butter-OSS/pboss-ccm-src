@@ -13,17 +13,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class OnDemandOutboundCicResponse {
 	
 	@JsonProperty("resp_header")
-	private RespHeader c3mRespHeader;
+	private RespHeader respHeader;
 	
 	@JsonProperty("validation_result")
 	private ValidationResult validationResult;
 
-	public RespHeader getC3mRespHeader() {
-		return c3mRespHeader;
+	public RespHeader getRespHeader() {
+		return respHeader;
 	}
 
-	public void setC3mRespHeader(RespHeader c3mRespHeader) {
-		this.c3mRespHeader = c3mRespHeader;
+	public void setRespHeader(RespHeader respHeader) {
+		this.respHeader = respHeader;
 	}
 
 	public ValidationResult getValidationResult() {
@@ -36,6 +36,6 @@ public class OnDemandOutboundCicResponse {
 
 	@Override
 	public String toString() {
-		return "OnDemandOutboundCicResponse [c3mRespHeader=" + c3mRespHeader + "]";
+		return "OnDemandOutboundCicResponse [respHeader=" + respHeader + "]";
 	}
 }

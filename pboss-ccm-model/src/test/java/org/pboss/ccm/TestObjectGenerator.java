@@ -57,7 +57,7 @@ public class TestObjectGenerator {
 		return apiCred;
 	}
 	
-	public static ReqHeader createC3mReqHeader() {
+	public static ReqHeader createReqHeader() {
 		ReqHeader head = new ReqHeader();
 	
 		head.setApiCredentials(createApiCredentials());
@@ -105,7 +105,7 @@ public class TestObjectGenerator {
 	public static OnDemandOutboundCicRequest createOnDemandOutboundCicRequest(String flavour) {
 		OnDemandOutboundCicRequest odocr = new OnDemandOutboundCicRequest();
 		
-		odocr.setReqHeader(createC3mReqHeader());
+		odocr.setReqHeader(createReqHeader());
 		odocr.setReqGuid("GUID");
 		odocr.setCic(creatCic(flavour));
 

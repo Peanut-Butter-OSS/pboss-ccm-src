@@ -15,8 +15,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * 
  * TODO: This spec is way too simplistic. In particular:
  *  - It assumes that the client will simply provide a list of email addresses.
- *    This is unlikely, what if C3M should derive the address from the payload
- *    Or what if C3M must derive the address from the unique CIC recipient code
+ *    This is unlikely, what if CCM should derive the address from the payload
+ *    Or what if CCM must derive the address from the unique CIC recipient code
  *  - It assumes that the Body and subject will necessarily be provided as CIC
  *    parts. What if the client simply wants to hard-code one or both
  * 

@@ -107,7 +107,7 @@ public class ReqHeader {
 
 	@Override
 	public String toString() {
-		return "C3mReqHeader [requestTimestamp=" + requestTimestamp + ", apiVersion=" + apiVersion + ", corrId="
+		return "ReqHeader [requestTimestamp=" + requestTimestamp + ", apiVersion=" + apiVersion + ", corrId="
 				+ corrId + ", testLevel=" + testLevel + ", apiCredentials=" + apiCredentials + ", systemInstanceId="
 				+ systemInstanceId + "]";
 	}
