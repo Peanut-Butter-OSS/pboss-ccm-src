@@ -24,6 +24,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 
@@ -34,8 +35,9 @@ public class OnDemandReqSvc {
   Logger logger = LoggerFactory.getLogger(OnDemandReqSvc.class);
   
   private final RabbitTemplate rabbitTemplate;
-  static final String topicExchangeName = "pboss-ccm-exchange";
-  static final String queueName = "pboss.ccm.master";
+  private static final String EXCHANGE_NAME = "pboss-ccm-exchange";
+  private static final String QUEUE_NAME = "pboss.ccm.master";
+  private static final String ROUTING_KEY = "pboss.ccm.master";
 
   @Value("${api.version}")
   private String apiVersion;
@@ -45,19 +47,18 @@ public class OnDemandReqSvc {
 
   @Bean
   Queue queue() {
-      return new Queue(queueName, false);
+      return new Queue(QUEUE_NAME, true);
   }
 
   @Bean
   TopicExchange exchange() {
-      return new TopicExchange(topicExchangeName);
+      return new TopicExchange(EXCHANGE_NAME);
   }
 
   @Bean
   Binding binding(Queue queue, TopicExchange exchange) {
       return BindingBuilder.bind(queue).to(exchange).with("pboss.ccm.#");
   }
-  
 
   public OnDemandReqSvc(RabbitTemplate rabbitTemplate) {
       this.rabbitTemplate = rabbitTemplate;
@@ -157,8 +158,8 @@ public class OnDemandReqSvc {
         
         // Send message to RabbitMQ
         // Exchange, routing key, message
-        rabbitTemplate.convertAndSend(topicExchangeName, "pboss.ccm.master", jsonString);
-
+        rabbitTemplate.convertAndSend(EXCHANGE_NAME, ROUTING_KEY, jsonString);
+        
         respHeader.setRespCode(0);
         respHeader.setRespMsg("Successfully submitted CIC Request to PBoss CCM Core");
         respHeader.setReqGuid(reqGuid);
@@ -172,7 +173,7 @@ public class OnDemandReqSvc {
             .setRespMsg("An exception occurred while submitting CIC Request to PBoss CCM Core. Msg: "
                 + e.getMessage());
         respHeader.setErrorId(1);
-      } catch (RuntimeException e) {
+      } catch (AmqpException e) {
         // TODO Check that the mqProducer class throws proper exceptions that can be caught here
         // TODO: Get the correct error id
         e.printStackTrace();
