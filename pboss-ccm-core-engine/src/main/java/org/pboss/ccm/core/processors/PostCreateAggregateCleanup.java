@@ -13,16 +13,15 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class PostCreateAggregateCleanup implements Processor {
-	
+
   Logger logger = LoggerFactory.getLogger(MessageAnalyser.class);
 
-	@Override
-	public void process(Exchange exchange) throws Exception {
-		
-		// Remove CicPart-specific headers
-		exchange.getIn().removeHeader("C3M_PartGuid");
-		exchange.getIn().removeHeader("C3M_PartId");
-		
-	}
+  public void process(Exchange exchange) throws Exception {
+
+    // Remove CicPart-specific headers
+    exchange.getIn().removeHeader("CCM_PartGuid");
+    exchange.getIn().removeHeader("CCM_PartId");
+
+  }
 
 }
