@@ -8,7 +8,7 @@ import org.pboss.ccm.core.processors.PostCreateAggregateCleanup;
 import org.pboss.ccm.core.processors.PreCreateAggregationValidator;
 import org.pboss.ccm.core.processors.StatusUpdater;
 import org.pboss.ccm.core.splitters.RequestSplitter;
-import org.pboss.ccm.core.utils.camel.ExchangeLogger;
+import org.pboss.ccm.utils.camel.ExchangeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

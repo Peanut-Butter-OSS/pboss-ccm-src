@@ -14,7 +14,11 @@
 
 	<modules>
     		<module>pboss-ccm-model</module>
-    		<module>pboss-ccm-config-server</module>
-    <module>pboss-ccm-core-engine</module>
-  </modules>
+		<module>pboss-ccm-config-server</module>
+		<module>pboss-ccm-eureka</module>
+		<module>pboss-ccm-on-demand-request-svc</module>
+    		<module>pboss-ccm-on-demand-api</module>
+		<module>pboss-ccm-utils</module>	
+    		<module>pboss-ccm-core-engine</module>
+	</modules>
 </project>

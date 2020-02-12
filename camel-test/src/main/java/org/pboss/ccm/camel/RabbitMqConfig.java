@@ -27,7 +27,7 @@ public class RabbitMqConfig {
 
   @Bean
   Binding binding(Queue queue, TopicExchange exchange) {
-      return BindingBuilder.bind(queue).to(exchange).with("pboss.ccm.#");
+      return BindingBuilder.bind(queue).to(exchange).with("pboss.ccm.master");
   }
   
   @Bean

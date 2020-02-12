@@ -1,13 +1,13 @@
-package org.pboss.ccm.core.utils;
+package org.pboss.ccm.utils;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PbossCcmCoreUtilsApplication {
+public class PbossCcmUtilsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PbossCcmCoreUtilsApplication.class, args);
+		SpringApplication.run(PbossCcmUtilsApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package org.pboss.ccm.core.utils.camel;
+package org.pboss.ccm.utils.camel;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package org.pboss.ccm.pbossccmcoreutils;
+package org.pboss.ccm.utils;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class PbossCcmCoreUtilsApplicationTests {
+@SpringBootTest(classes = PbossCcmUtilsApplication.class)
+class PbossCcmUtilsApplicationTests {
 
 	@Test
 	void contextLoads() {
